@@ -17,10 +17,12 @@
     <div id="header">
       <h1>The Scriptures, Mapped</h1>
     </div>
-    <div id="navigator"></div>
-    <div id="map">
-      <div id="map"></div>
+
+    <div id="content">
+      <nav id="scriptures"></nav>
+      <article id="map"></article>
     </div>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       crossorigin="anonymous"
@@ -60,7 +62,59 @@
         d[l]
           ? console.warn(p + " only loads once. Ignoring:", g)
           : (d[l] = (f, ...n) => r.add(f) && u().then(() => d[l](f, ...n)));
-      })({ key: "AIzaSyB41DRUbKWJHPxaFjMAwdrzWzbVKartNGg", v: "weekly" });
+      })({ key: "AIzaSyC77ZXQEYx565KDD0xFVFM8kedBFL1sPvI", v: "weekly" });
+    </script>
+    <script>
+      // Initialize and add the map
+      let map;
+      let mapIsLoaded = false;
+
+      async function initMap() {
+        const { Map } = await google.maps.importLibrary("maps");
+        // const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
+        map = new Map(document.getElementById("map"), {
+          zoom: 10,
+          center: { lat: 31.77, lng: 35.22 },
+          mapTypeId: "terrain",
+          mapTypeControl: false,
+          streetViewControl: false,
+          fullscreenControl: false,
+          zoomControl: true,
+          zoomControlOptions: {
+            position: google.maps.ControlPosition.RIGHT_BOTTOM,
+          },
+          // mapId: "DEMO_MAP_ID",
+        });
+
+        mapIsLoaded = true;
+        console.log("Maps JavaScript API loaded.");
+      }
+
+      initMap();
+
+      function ready(readyListener) {
+        if (document.readyState !== "loading") {
+          readyListener();
+        } else {
+          document.addEventListener("DOMContentLoaded", readyListener);
+        }
+      }
+
+      ready(function () {
+        Scriptures.init(function () {
+          window.addEventListener("hashchange", Scriptures.onHashChanged);
+          Scriptures.onHashChanged();
+        });
+      });
+
+      // Example of adding to your Scriptures object or as a separate function
+      function showLocation(latitude, longitude, placename, viewAltitude) {
+        if (!mapIsLoaded) {
+          console.warn("Map is not loaded yet");
+          return;
+        }
+      }
     </script>
     <script src="app.js"></script>
   </body>
