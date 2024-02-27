@@ -13,20 +13,79 @@
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="icon" href="./img/scriptures-mapped-favicon.png" />
   </head>
-  <body>
-    <div id="header">
+  <body class="m-0 p-0 bg-slate w-full font-sfpro">
+    <div
+      id="header"
+      class="w-full h-1/6 fixed top-0 left-0 bg-gradient-to-r from-primary-500 to-secondary-500 shadow-md z-10"
+    >
       <h1>The Scriptures, Mapped</h1>
     </div>
 
-    <div id="content">
-      <nav id="scriptures"></nav>
-      <article id="map"></article>
+    <div id="content" class="h-screen w-full flex">
+      <nav id="scriptures" class="h-full flex-grow flex-shrink basis-1/3"></nav>
+      <article
+        id="map"
+        class="w-full h-full flex-grow flex-shrink basis-2/3 overflow-visible"
+      ></article>
     </div>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      crossorigin="anonymous"
-    ></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+      tailwind.config = {
+        theme: {
+          colors: {
+            primary: {
+              100: "#E0E7FF",
+              200: "#C7D2FE",
+              300: "#A5B4FC",
+              400: "#818CF8",
+              500: "#6366F1", // Tailwind's indigo-500
+              600: "#4F46E5",
+              700: "#4338CA",
+              800: "#3730A3",
+              900: "#312E81",
+            },
+            secondary: {
+              100: "#FCE7F3",
+              200: "#FBCFE8",
+              300: "#F9A8D4",
+              400: "#F472B6",
+              500: "#EC4899", // Tailwind's pink-500
+              600: "#DB2777",
+              700: "#BE185D",
+              800: "#9D174D",
+              900: "#831843",
+            },
+            accent: {
+              100: "#FEF3C7",
+              200: "#FDE68A",
+              300: "#FCD34D",
+              400: "#FBBF24",
+              500: "#F59E0B", // Tailwind's amber-500
+              600: "#D97706",
+              700: "#B45309",
+              800: "#92400E",
+              900: "#78350F",
+            },
+            background: "#f1f5f9", // Tailwind's slate-100
+            text: "#1e293b", // Tailwind's slate-800
+            textLight: "#64748b", // Tailwind's slate-500
+            border: "#cbd5e1", // Tailwind's slate-300
+            success: "#10B981", // Tailwind's green-500
+            warning: "#FBBF24", // Tailwind's yellow-500
+            error: "#EF4444", // Tailwind's red-500
+            info: "#3B82F6", // Tailwind's blue-500
+          },
+          extend: {
+            fontFamily: {
+              sfpro: ["sf-pro", "system-ui", "sans-serif"],
+            },
+          },
+        },
+      };
+    </script>
+
     <script>
       ((g) => {
         var h,
