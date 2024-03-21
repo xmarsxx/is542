@@ -5,31 +5,116 @@
     <title>The Scriptures, Mapped</title>
     <meta name="viewport" content="width=device-width,initial-scale=1" />
     <meta name="description" content="The Standard Works, Geolocations" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      crossorigin="anonymous"
-    />
+    <!-- <link
+			href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+			rel="stylesheet"
+			crossorigin="anonymous"
+		/> -->
     <link rel="stylesheet" type="text/css" href="style.css" />
     <link rel="icon" href="./img/scriptures-mapped-favicon.png" />
   </head>
-  <body class="m-0 p-0 bg-slate w-full font-sfpro">
-    <div
-      id="header"
-      class="w-full h-1/6 fixed top-0 left-0 bg-gradient-to-r from-primary-500 to-secondary-500 shadow-md z-10"
-    >
-      <h1>The Scriptures, Mapped</h1>
+  <body class="h-screen m-0 p-0 bg-slate w-full font-sfpro flex flex-col">
+    <div id="header" class="flex flex-col sm:flex-row w-full">
+      <div
+        id="breadcrumbs-container"
+        class="flex items-center justify-between rounded-lg shadow bg-light w-full px-2 my-3 sm:mx-auto sm:p-3 sm:w-full lg:w-1/3 lg:mx-3 lg:px-4 order-2 sm:order-1 text-xs md:text-base overflow-hidden"
+      >
+        <p
+          id="breadcrumbs"
+          class="breadcrumbs text-gray-400 py-1 px-0 sm:px-3 cursor-default inline-flex items-center"
+        ></p>
+        <div
+          id="chapter-navigation"
+          class="chapter-navigation flex items-center"
+        >
+          <button
+            id="previous-chapter"
+            class="mr-3 text-gray-400 transition ease-in-out hover:text-gray-500 ease-in-out"
+            onclick="Scriptures.navigatePreviousChapter()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <g clip-path="url(#a)">
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.25-7.25a.75.75 0 0 0 0-1.5H8.66l2.1-1.95a.75.75 0 1 0-1.02-1.1l-3.5 3.25a.75.75 0 0 0 0 1.1l3.5 3.25a.75.75 0 0 0 1.02-1.1l-2.1-1.95h4.59Z"
+                  clip-rule="evenodd"
+                />
+              </g>
+              <defs>
+                <clipPath id="a">
+                  <path d="M0 0h20v20H0z" />
+                </clipPath>
+              </defs>
+            </svg>
+          </button>
+          <button
+            id="next-chapter"
+            class="ml-3 text-gray-400 transition ease-in-out hover:text-gray-500 ease-in-out"
+            onclick="Scriptures.navigateNextChapter()"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16ZM6.75 9.25a.75.75 0 0 0 0 1.5h4.59l-2.1 1.95a.75.75 0 0 0 1.02 1.1l3.5-3.25a.75.75 0 0 0 0-1.1l-3.5-3.25a.75.75 0 1 0-1.02 1.1l2.1 1.95H6.75Z"
+                clip-rule="evenodd"
+              />
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div
+        id="site-title"
+        class="w-full sm:mx-3 sm:grow my-3 p-3 rounded-lg lg:px-4 bg-gradient-to-r from-secondary-500 via-accent-500 to-red-500 shadow-md z-10 sm:hover:animate-pulse order-1 sm:order-2 flex flex-row"
+      >
+        <div
+          class="mobile-menu sm:hidden inline-flex items-center text-light grow-0"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 20 20"
+            fill="currentColor"
+            class="w-5 h-5"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M2 4.75A.75.75 0 0 1 2.75 4h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 4.75ZM2 10a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75A.75.75 0 0 1 2 10Zm0 5.25a.75.75 0 0 1 .75-.75h14.5a.75.75 0 0 1 0 1.5H2.75a.75.75 0 0 1-.75-.75Z"
+              clip-rule="evenodd"
+            />
+          </svg>
+        </div>
+        <h1
+          class="m-3 text-light font-semibold text-2xl tracking-wide grow text-center sm:text-left"
+        >
+          <a href="#" class="nav-animation">The Scriptures, Mapped</a>
+        </h1>
+      </div>
     </div>
 
-    <div id="content" class="h-screen w-full flex">
-      <nav id="scriptures" class="h-full flex-grow flex-shrink basis-1/3"></nav>
+    <div id="content" class="flex-grow w-full flex flex-col sm:flex-row">
+      <nav
+        id="scriptures"
+        class="relative h-full w-full sm:w-1/3 overflow-auto flex flex-col items-center"
+      ></nav>
       <article
         id="map"
-        class="w-full h-full flex-grow flex-shrink basis-2/3 overflow-visible"
+        class="h-full grow w-full sm:w-2/3 rounded-lg mt-3 lg:ml-6 sm:mt-0 sm:ml-3"
       ></article>
     </div>
 
     <script src="https://cdn.tailwindcss.com"></script>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
     <script>
       tailwind.config = {
@@ -68,9 +153,32 @@
               800: "#92400E",
               900: "#78350F",
             },
+            red: {
+              100: "#FEE2E2",
+              200: "#FECACA",
+              300: "#FCA5A5",
+              400: "#F87171",
+              500: "#EF4444", // Tailwind's red-500
+              600: "#DC2626",
+              700: "#B91C1C",
+              800: "#991B1B",
+              900: "#7F1D1D",
+            },
+            gray: {
+              100: "#F3F4F6",
+              200: "#E5E7EB",
+              300: "#D1D5DB",
+              400: "#9CA3AF",
+              500: "#6B7280",
+              600: "#4B5563",
+              700: "#374151",
+              800: "#1F2937",
+              900: "#111827",
+            },
             background: "#f1f5f9", // Tailwind's slate-100
-            text: "#1e293b", // Tailwind's slate-800
-            textLight: "#64748b", // Tailwind's slate-500
+            dark: "#1e293b", // Tailwind's slate-800
+            superLight: "rgb(250 250 250);", // Tailwind's zinc-50
+            light: "#f4f4f5", // Tailwind's zinc-100
             border: "#cbd5e1", // Tailwind's slate-300
             success: "#10B981", // Tailwind's green-500
             warning: "#FBBF24", // Tailwind's yellow-500
@@ -176,5 +284,6 @@
       }
     </script>
     <script src="app.js"></script>
+    <script src="app-jquery.js"></script>
   </body>
 </html>

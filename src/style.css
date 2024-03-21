@@ -1,12 +1,17 @@
 /* Custom Fonts */
 @font-face {
-    font-family: 'sf-pro';
-    src: url('fonts/SFPro-Regular.woff') format('woff'), /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-         url('fonts/SF-Pro.ttf') format('truetype'); /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
+	font-family: 'SF Pro';
+	src: url('../src/fonts/SFPro-Regular.eot'); /* IE9 Compat Modes */
+	src: url('../src/fonts/SFPro-Regular.eot?#iefix')
+			format('embedded-opentype'),
+		/* IE6-IE8 */ url('../src/fonts/SFPro-Regular.woff2') format('woff2'),
+		/* Super Modern Browsers */ url('../src/fonts/SFPro-Regular.woff')
+			format('woff'),
+		/* Modern Browsers */ url('../src/fonts/SF-Pro.ttf') format('truetype'); /* Safari, Android, iOS */
 }
 
 /* Always set the map height explicitly to define the size of the div
  * element that contains the map. */
 gmp-map {
-  height: 100%;
+	height: 100%;
 }
